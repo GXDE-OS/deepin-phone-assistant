@@ -65,9 +65,12 @@ DWIDGET_USE_NAMESPACE
 
 extern "C" {
 #include "libavformat/avformat.h"
-#include "libswscale/swscale.h"
+#include <libswscale/swscale.h>
+//#include "libswscale/swscale.h"
 #include "libavutil/imgutils.h"
+#include <libavcodec/avcodec.h>
 }
+
 
 Utils::Utils()
 {
@@ -1463,7 +1466,7 @@ bool Utils::_readVideo_ffmpeg_one(const char *input, QPixmap &pixmap, int &nTime
     //获取视频流中的编解码上下文
     AVCodecParameters *pCodecPara = pFormatCtx->streams[v_stream_idx]->codecpar;
     // 4.根据编解码上下文中的编码id查找对应的解码
-    AVCodec *pCodec = avcodec_find_decoder(pCodecPara->codec_id);
+    const AVCodec *pCodec = avcodec_find_decoder(pCodecPara->codec_id);
     if (pCodec == nullptr) {
         qDebug("%s", "找不到解码器");
         if (pFormatCtx != nullptr) {

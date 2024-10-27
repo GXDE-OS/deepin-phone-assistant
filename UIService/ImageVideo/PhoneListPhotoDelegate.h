@@ -19,6 +19,10 @@
 
 #include "defines.h"
 #include "base/BaseListViewItemDelegate.h"
+#include <DPalette>
+
+DWIDGET_USE_NAMESPACE
+DGUI_USE_NAMESPACE
 
 class PhoneListPhotoDelegate : public BaseListViewItemDelegate
 {
